@@ -33,12 +33,11 @@ module.exports = {
           [`^(${require('module').builtinModules.join('|')})(/|$)`],
           // React first, then any other packages
           ['^react$', '^@?\\w'],
-          // Curbflow packages
-          ['^@curbflow(/.*|$)'],
           // Absolute imports (doesn"t start with .)
           ['^(\\.|@)prisma', '^[^.]', '^src/'],
           // Relative imports
           [
+            '^app(/.*|$)',
             // ../whatever/
             '^\\.\\./(?=.*/)',
             // ../
