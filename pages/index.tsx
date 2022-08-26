@@ -1,6 +1,6 @@
 import { BlitzPage } from '@blitzjs/next';
 
-import Table from 'app/core/components/Table';
+import { Table } from 'app/core/components/Table';
 import Layout from 'app/core/layouts/Layout';
 
 const Home: BlitzPage = () => {

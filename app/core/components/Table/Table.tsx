@@ -1,19 +1,11 @@
-import {
-  Column,
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  RowData,
-  TableOptions,
-  useReactTable,
-} from '@tanstack/react-table';
+import { ColumnDef, flexRender, getCoreRowModel, RowData, TableOptions, useReactTable } from '@tanstack/react-table';
 
-import { classNames } from '../lib/utils';
+import * as cls from './Table.css';
 
 export type { Column, ColumnDef, RowData } from '@tanstack/react-table';
 
-const getClassNameForCell = ({ columnDef: { meta } }: Column<any, any>, header: boolean = false) =>
-  classNames(meta?.className, header ? meta?.headerClassName : meta?.cellClassName);
+// const getClassNameForCell = ({ columnDef: { meta } }: Column<any, any>, header: boolean = false) =>
+//   classNames(meta?.className, header ? meta?.headerClassName : meta?.cellClassName);
 
 export type TableProps<TData extends RowData, TValue extends any = unknown> = {
   data?: TData[];
@@ -42,8 +34,8 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
   const showSkeleton = isLoading && !data;
 
   return (
-    <div className="w-full">
-      <table className="table w-full">
+    <div className={cls.container}>
+      <table className={cls.table}>
         {/* head */}
         <thead>
           {table.getHeaderGroups().map((group) => (
@@ -52,7 +44,7 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
                 <th
                   key={header.id}
                   colSpan={header.colSpan}
-                  className={classNames('align-top', getClassNameForCell(header.column, true))}
+                  // className={classNames('align-top', getClassNameForCell(header.column, true))}
                 >
                   {!header.isPlaceholder && flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
@@ -71,10 +63,16 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
               ))
             : table.getRowModel().rows.map((row) => {
                 return (
-                  <tr key={row.id} className={classNames(row.getIsSelected() && 'active')}>
+                  <tr
+                    key={row.id}
+                    // className={classNames(row.getIsSelected() && 'active')}
+                  >
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <td key={cell.id} className={getClassNameForCell(cell.column)}>
+                        <td
+                          key={cell.id}
+                          // className={getClassNameForCell(cell.column)}
+                        >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
                       );

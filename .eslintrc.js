@@ -2,12 +2,7 @@
  * @type {import('@types/eslint').Linter.Config}
  */
 module.exports = {
-  extends: [
-    require.resolve('@blitzjs/next/eslint'),
-    'next/core-web-vitals',
-    'plugin:tailwindcss/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: [require.resolve('@blitzjs/next/eslint'), 'next/core-web-vitals', 'plugin:prettier/recommended'],
   plugins: ['simple-import-sort', 'import', 'unused-imports'],
   rules: {
     'no-unused-vars': 'off',
@@ -16,8 +11,6 @@ module.exports = {
       'warn',
       { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
     ],
-    // tailwind eslint plugin
-    'tailwindcss/no-custom-classname': 'off',
     // import sorts
     'import/first': 'error',
     'import/newline-after-import': 'error',
