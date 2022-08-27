@@ -1,15 +1,16 @@
-import { useMutation } from '@blitzjs/rpc';
-import signup from 'app/auth/mutations/signup';
-import { Signup } from 'app/auth/validations';
-import { Form, FORM_ERROR } from 'app/core/components/Form';
-import { LabeledTextField } from 'app/core/components/LabeledTextField';
+import { useMutation } from '@blitzjs/rpc'
+
+import signup from 'app/auth/mutations/signup'
+import { Signup } from 'app/auth/validations'
+import { Form, FORM_ERROR } from 'app/core/components/Form'
+import { LabeledTextField } from 'app/core/components/LabeledTextField'
 
 type SignupFormProps = {
-  onSuccess?: () => void;
-};
+  onSuccess?: () => void
+}
 
 export const SignupForm = (props: SignupFormProps) => {
-  const [signupMutation] = useMutation(signup);
+  const [signupMutation] = useMutation(signup)
   return (
     <div>
       <h1>Create an Account</h1>
@@ -20,14 +21,14 @@ export const SignupForm = (props: SignupFormProps) => {
         initialValues={{ email: '', password: '' }}
         onSubmit={async (values) => {
           try {
-            await signupMutation(values);
-            props.onSuccess?.();
+            await signupMutation(values)
+            props.onSuccess?.()
           } catch (error: any) {
             if (error.code === 'P2002' && error.meta?.target?.includes('email')) {
               // This error comes from Prisma
-              return { email: 'This email is already being used' };
+              return { email: 'This email is already being used' }
             } else {
-              return { [FORM_ERROR]: error.toString() };
+              return { [FORM_ERROR]: error.toString() }
             }
           }
         }}
@@ -36,7 +37,7 @@ export const SignupForm = (props: SignupFormProps) => {
         <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default SignupForm;
+export default SignupForm

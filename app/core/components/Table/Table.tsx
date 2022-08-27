@@ -1,19 +1,19 @@
-import { ColumnDef, flexRender, getCoreRowModel, RowData, TableOptions, useReactTable } from '@tanstack/react-table';
+import { ColumnDef, flexRender, getCoreRowModel, RowData, TableOptions, useReactTable } from '@tanstack/react-table'
 
-import * as cls from './Table.css';
+import * as cls from './Table.css'
 
-export type { Column, ColumnDef, RowData } from '@tanstack/react-table';
+export type { Column, ColumnDef, RowData } from '@tanstack/react-table'
 
 // const getClassNameForCell = ({ columnDef: { meta } }: Column<any, any>, header: boolean = false) =>
 //   classNames(meta?.className, header ? meta?.headerClassName : meta?.cellClassName);
 
 export type TableProps<TData extends RowData, TValue extends any = unknown> = {
-  data?: TData[];
-  columns: ColumnDef<TData, TValue>[];
+  data?: TData[]
+  columns: ColumnDef<TData, TValue>[]
   /** If true & data is falsy, shows a skeleton loading animation */
-  isLoading?: boolean;
-  reactTableOptions?: Omit<TableOptions<TData>, 'data' | 'columns' | 'getCoreRowModel'>;
-};
+  isLoading?: boolean
+  reactTableOptions?: Omit<TableOptions<TData>, 'data' | 'columns' | 'getCoreRowModel'>
+}
 
 const Table = <TData extends RowData, TValue extends any = unknown>({
   data,
@@ -21,7 +21,7 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
   isLoading,
   reactTableOptions,
 }: TableProps<TData, TValue>) => {
-  const isPaginated = reactTableOptions?.manualPagination || reactTableOptions?.getPaginationRowModel;
+  const isPaginated = reactTableOptions?.manualPagination || reactTableOptions?.getPaginationRowModel
 
   const table = useReactTable({
     data: data ?? [],
@@ -29,9 +29,9 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
     // Pipeline
     getCoreRowModel: getCoreRowModel(),
     ...reactTableOptions,
-  });
+  })
 
-  const showSkeleton = isLoading && !data;
+  const showSkeleton = isLoading && !data
 
   return (
     <div className={cls.container}>
@@ -75,10 +75,10 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
                         >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
-                      );
+                      )
                     })}
                   </tr>
-                );
+                )
               })}
         </tbody>
       </table>
@@ -97,7 +97,7 @@ const Table = <TData extends RowData, TValue extends any = unknown>({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

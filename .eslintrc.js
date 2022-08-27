@@ -5,6 +5,7 @@ module.exports = {
   extends: [require.resolve('@blitzjs/next/eslint'), 'next/core-web-vitals', 'plugin:prettier/recommended'],
   plugins: ['simple-import-sort', 'import', 'unused-imports'],
   rules: {
+    semi: 'off',
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'warn',
     'unused-imports/no-unused-vars': [
@@ -46,4 +47,4 @@ module.exports = {
       },
     ],
   },
-};
+}
